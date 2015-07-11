@@ -1,0 +1,974 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2015-08-09 Sun 21:37 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>MESA Summer School 2015: Lecture 1</title>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Josiah Schwab and Emily Leiner" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="readtheorg/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="readtheorg/js/readtheorg.js"></script>
+<style>pre.src {background-color: #303030; color: #e5e5e5;}</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">MESA Summer School 2015: Lecture 1</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">Lecture 1: Going Beyond Inlists</a>
+<ul>
+<li><a href="#orgheadline2">Part 1: Evolving a Single Star</a>
+<ul>
+<li><a href="#orgheadline3">Part 1a: Getting started</a>
+<ul>
+<li><a href="#orgheadline4">Task 1: Compile the provided work directory</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline5">Part 1b: Changing output</a>
+<ul>
+<li><a href="#orgheadline6">Task 2: Add some output</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline7">Part 1c: Changing inlists</a>
+<ul>
+<li><a href="#orgheadline8">Task 3: Change the stopping condition</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline9">Part 2: Using Run Star Extras</a>
+<ul>
+<li><a href="#orgheadline13">Part 2a: Monitoring your models</a>
+<ul>
+<li><a href="#orgheadline10">Task 0 (Example): Add a stopping condition based on radius</a></li>
+<li><a href="#orgheadline11">Task 1: Find the minimum radius</a></li>
+<li><a href="#orgheadline12">Task 2: Stop when the star expands</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline14">Part 2b: Changing controls on-the-fly</a>
+<ul>
+<li><a href="#orgheadline15">Task 3: Turn on mass loss when the star reaches 2 Rsun</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline16">Part 2c: Changing input physics</a>
+<ul>
+<li><a href="#orgheadline17">Task 4: Add a wind that depends on the radius</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline18">Part 3: Evolving Binary Stars</a>
+<ul>
+<li><a href="#orgheadline19">Task 1: Evolve a binary (one star + point mass)</a></li>
+<li><a href="#orgheadline20">Task 2: Evolve a binary (two stars)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Lecture 1: Going Beyond Inlists</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+This guide was written as part of the 2015 MESA summer school.  It is
+an introduction to MESA, with a particular focus on using
+<code>run_star_extras.f</code> as well as MESA's binary capabilities.  It assumes
+you are using r7624 of MESA (which self-reports as r7623, so don't
+worry about that).
+</p>
+
+<p>
+If you're new to Fortran, we prepared a short document with <a href="fortran.html">some
+examples</a>.  Don't let yourself get hung up by the Fortran; quickly ask
+your classmates and the TAs for help!
+</p>
+
+<p>
+There is a version of this document available with <a href="solutions.html">solutions</a>.  The <a href="https://github.com/jschwab/mesa-2015/tree/master">git
+repository</a> hosting this document contains the full source code used in
+each task, which you can see by looking at the appropriately named tag
+(i.e. part2-task2).
+</p>
+</div>
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Part 1: Evolving a Single Star</h3>
+<div class="outline-text-3" id="text-orgheadline2">
+<p>
+The most common usage of MESA is doing single-star evolution.  If
+you've used MESA before, or even just done the pre-school tutorial,
+much of this should be familiar.
+</p>
+</div>
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3">Part 1a: Getting started</h4>
+<div class="outline-text-4" id="text-orgheadline3">
+<p>
+Each time you want to start a MESA project, you should make a new copy
+of the <code>star/work</code> directory.
+</p>
+<pre class="example">
+cp -r $MESA_DIR/star/work lecture1-single
+</pre>
+<p>
+In this case, we have prepared and provided a work directory for
+you. <a href="lecture1-single.zip">Download</a>, unpack, and enter this work directory.
+</p>
+<pre class="example">
+unzip lecture1-single.zip
+cd lecture1-single
+</pre>
+</div>
+<div id="outline-container-orgheadline4" class="outline-5">
+<h5 id="orgheadline4">Task 1: Compile the provided work directory</h5>
+<div class="outline-text-5" id="text-orgheadline4">
+<p>
+This directory evolves a solar mass star from the (late)
+pre-main-sequence to hydrogen exhaustion. Confirm that you can compile
+it.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5">Part 1b: Changing output</h4>
+<div class="outline-text-4" id="text-orgheadline5">
+<p>
+MESA already knows how to output a tremendous amount of information.
+The two key file types are history files, which store the value of
+scalar quantities (e.g. mass, luminosity) at different timesteps and
+profile files which store the value of spatially varying quantities
+(e.g. density, pressure) at a single timestep.
+</p>
+
+<p>
+The default output is set by the files
+</p>
+<pre class="example">
+$MESA_DIR/star/defaults/history_columns.list
+$MESA_DIR/star/defaults/profile_columns.list
+</pre>
+<p>
+In order to customize the output, you would copy these files to your
+work directory.  (In the <code>lecture1-single</code> working directory, we have
+already performed this step.)
+</p>
+<pre class="example">
+cp $MESA_DIR/star/defaults/history_columns.list .
+cp $MESA_DIR/star/defaults/profile_columns.list .
+</pre>
+<p>
+Then, open up <code>history_columns.list</code> or <code>profile_columns.list</code> in a
+text editor and comment/uncomment any lines to add/remove the columns
+of interest ('!' is the comment character.)
+</p>
+
+<p>
+You can use <code>run_star_extras.f</code> to define your own history and/or
+profile columns.  This capability is covered on the <a href="http://mesa.sourceforge.net/run_star_extras.html#toc-1-2">MESA website</a>; we
+will not cover it today.
+</p>
+</div>
+<div id="outline-container-orgheadline6" class="outline-5">
+<h5 id="orgheadline6">Task 2: Add some output</h5>
+<div class="outline-text-5" id="text-orgheadline6">
+<p>
+Before distributing this directory, I ran MESA, so there is already
+some output here.  Look at <code>LOGS/history.data</code> to see what was
+included.  For our later exercises, we will want to know the radius
+(in solar units) and the central mass fraction of hydrogen.  Add these
+quantities to your output.  Run MESA and check that the data you want
+were output.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7">Part 1c: Changing inlists</h4>
+<div class="outline-text-4" id="text-orgheadline7">
+<p>
+MESA/star has three inlist sections.  Each section each contains the
+options for a different aspect of MESA.
+</p>
+<dl class="org-dl">
+<dt>star_job</dt><dd>options for the program that evolves the star</dd>
+<dt>controls</dt><dd>options for the MESA star module</dd>
+<dt>pgstar</dt><dd>options for on-screen plotting</dd>
+</dl>
+<p>
+The distinction between <code>star_job</code> and <code>controls</code> can be a little
+subtle. We won't discuss <code>pgstar</code> in the lecture, but Frank will this
+afternoon.
+</p>
+
+<p>
+<code>star_job</code> contains options that answer questions like:
+</p>
+<ul class="org-ul">
+<li>how should MESA obtain a the initial model?</li>
+<li>are there any changes MESA should make to the initial model?</li>
+<li>what microphysics data should MESA read?</li>
+<li>where should MESA store its output?</li>
+</ul>
+
+<p>
+<code>controls</code> contains options that answer questions like:
+</p>
+<ul class="org-ul">
+<li>when should MESA stop evolving the model?</li>
+<li>which angular momentum transport processes should MESA consider?</li>
+<li>what numerical tolerances should MESA's solvers use?</li>
+</ul>
+
+<p>
+MESA's many inlist options are documented in the files
+</p>
+<ul class="org-ul">
+<li><a href="http://mesa.sourceforge.net/star_job_defaults.html"><code>$MESA_DIR/star/defaults/star_job.defaults</code></a></li>
+<li><a href="http://mesa.sourceforge.net/controls_defaults.html"><code>$MESA_DIR/star/defaults/controls.defaults</code></a></li>
+<li><a href="http://mesa.sourceforge.net/pgstar_defaults.html"><code>$MESA_DIR/star/defaults/pgstar.defaults</code></a></li>
+</ul>
+<p>
+They are roughly sorted into groups of related options.  When you're
+searching for an option, see if it seems to match any of the section
+headings and then look there first.  If that fails, try searching for
+some keywords.
+</p>
+</div>
+
+
+<div id="outline-container-orgheadline8" class="outline-5">
+<h5 id="orgheadline8">Task 3: Change the stopping condition</h5>
+<div class="outline-text-5" id="text-orgheadline8">
+<p>
+Let's change the stopping condition and evolve until the luminosity is
+twice the solar luminosity.  You will need to look up the necessary
+option and edit your inlist.  This condition will occur later than the
+previous stopping condition, so don't start a new run; restart from
+the end of your last run.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Part 2: Using Run Star Extras</h3>
+<div class="outline-text-3" id="text-orgheadline9">
+<p>
+To activate <code>run_star_extras.f</code>, navigate to the <code>lecture1-single/src</code>
+directory and open <code>run_star_extras.f</code> in your text editor of choice.
+The stock version of <code>run_star_extras.f</code> is quite boring.  It
+"includes" another file which holds the default set of routines.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-f90"><span style="color: #00ffff;">include</span> <span style="color: #ffa07a;">'standard_run_star_extras.inc'</span>
+</pre>
+</div>
+<p>
+The routines included in this file are the ones we will want to
+customize.  Because we want these modifications to apply only to this
+working copy of MESA, and not to MESA as a whole, we want to replace
+this include statement with the contents of the included file.
+</p>
+
+<p>
+Delete the aforementioned include line and insert the contents of
+<code>$MESA_DIR/include/standard_run_star_extras.inc</code>. (The command to
+insert the contents of a file in emacs is C-x i &lt;filename&gt;, vim :r
+&lt;filename&gt;, or you can just copy and paste.)
+</p>
+
+<p>
+Before we make any changes, we should check that the code compiles.
+</p>
+<pre class="example">
+cd ..
+./mk
+</pre>
+<p>
+If it doesn't compile, double check that you cleanly inserted the file
+and removed the include line.
+</p>
+
+<p>
+The two most important things that one needs to know in order to use
+<code>run_star_extras.f</code> effectively are (1) the control flow of a MESA run
+and (2) the contents of the star_info structure.
+</p>
+
+<p>
+The different <code>run_star_extras.f</code> routines get called at different
+points during MESA execution.  Here is a high-level overview of a MESA
+run, written in Fortran-ish pseudocode.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-f90"><span style="color: #00ffff;">subroutine</span> <span style="color: #87cefa;">run1_star</span>(...)
+
+   <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">star is initialized here</span>
+
+   <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">before evolve loop calls:</span>
+   <span style="color: #ff7f24;">!   </span><span style="color: #ff7f24;">extras_controls</span>
+   <span style="color: #ff7f24;">!   </span><span style="color: #ff7f24;">extras_startup</span>
+   <span style="color: #00ffff;">call</span> <span style="color: #87cefa;">before_evolve_loop</span>(...)
+
+   <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">evolve one step per loop</span>
+   <span style="color: #7fffd4;">evolve_loop</span>: <span style="color: #00ffff;">do while</span>(continue_evolve_loop)
+
+      <span style="color: #00ffff;">call</span> <span style="color: #87cefa;">before_step_loop</span>(...)
+
+      <span style="color: #7fffd4;">step_loop</span>: <span style="color: #00ffff;">do</span> <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">may need to repeat this loop</span>
+
+         <span style="color: #00ffff;">if</span> (stop_is_requested(s)) <span style="color: #00ffff;">then</span>
+            continue_evolve_loop = <span style="color: #00ffff;">.false.</span>
+            <span style="color: #00ffff;">result</span> = terminate
+            <span style="color: #00ffff;">exit</span>
+         <span style="color: #00ffff;">end if</span>
+
+         <span style="color: #00ffff;">result</span> = star_evolve_step(...)
+         <span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">result</span> == keep_going) <span style="color: #00ffff;">result</span> = star_check_model(...)
+         <span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">result</span> == keep_going) <span style="color: #00ffff;">result</span> = extras_check_model(...)
+         <span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">result</span> == keep_going) <span style="color: #00ffff;">result</span> = star_pick_next_timestep(...)
+         <span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">result</span> == keep_going) <span style="color: #00ffff;">exit</span> <span style="color: #7fffd4;">step_loop</span>
+
+         <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">redo, retry, or backup must be done inside the step_loop</span>
+
+         <span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">result</span> == redo) <span style="color: #00ffff;">then</span>
+            <span style="color: #00ffff;">result</span> = star_prepare_to_redo(...)
+         <span style="color: #00ffff;">end if</span>
+         <span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">result</span> == retry) <span style="color: #00ffff;">then</span>
+            <span style="color: #00ffff;">result</span> = star_prepare_to_retry(...)
+         <span style="color: #00ffff;">end if</span>
+         <span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">result</span> == backup) <span style="color: #00ffff;">then</span>
+            <span style="color: #00ffff;">result</span> = star_do1_backup(...)
+            just_did_backup = <span style="color: #00ffff;">.true.</span>
+         <span style="color: #00ffff;">else</span>
+            just_did_backup = <span style="color: #00ffff;">.false.</span>
+         <span style="color: #00ffff;">end if</span>
+         <span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">result</span> == terminate) <span style="color: #00ffff;">then</span>
+            continue_evolve_loop = <span style="color: #00ffff;">.false.</span>
+            <span style="color: #00ffff;">exit</span> <span style="color: #7fffd4;">step_loop</span>
+         <span style="color: #00ffff;">end if</span>
+
+      <span style="color: #00ffff;">end do</span><span style="color: #7fffd4;"> step_loop</span>
+
+      <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">once we get here, the only options are keep_going or terminate.</span>
+
+      <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">after_step_loop calls:</span>
+      <span style="color: #ff7f24;">!   </span><span style="color: #ff7f24;">extras_finish_step</span>
+      <span style="color: #00ffff;">call</span> <span style="color: #87cefa;">after_step_loop</span>(...)
+
+      <span style="color: #00ffff;">if</span> (<span style="color: #00ffff;">result</span> /= keep_going) <span style="color: #00ffff;">then</span>
+         <span style="color: #00ffff;">exit</span> <span style="color: #7fffd4;">evolve_loop</span>
+      <span style="color: #00ffff;">end if</span>
+
+      <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">write out data</span>
+      <span style="color: #ff7f24;">!</span>
+      <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">do_saves calls:</span>
+      <span style="color: #ff7f24;">!   </span><span style="color: #ff7f24;">how_many_extra_history_columns</span>
+      <span style="color: #ff7f24;">!   </span><span style="color: #ff7f24;">data_for_extra_history_columns</span>
+      <span style="color: #ff7f24;">!   </span><span style="color: #ff7f24;">how_many_extra_profile_columns</span>
+      <span style="color: #ff7f24;">!   </span><span style="color: #ff7f24;">data_for_extra_profile_columns</span>
+      <span style="color: #00ffff;">call</span> <span style="color: #87cefa;">do_saves</span>(...)
+
+   <span style="color: #00ffff;">end do</span><span style="color: #7fffd4;"> evolve_loop</span>
+
+   <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">after_evolve_loop calls:</span>
+   <span style="color: #ff7f24;">!   </span><span style="color: #ff7f24;">extras_after_evolve</span>
+   <span style="color: #00ffff;">call</span> <span style="color: #87cefa;">after_evolve_loop</span>(...)
+
+<span style="color: #00ffff;">end subroutine</span> <span style="color: #87cefa;">run1_star</span>
+</pre>
+</div>
+
+<p>
+In even more distilled terms, here is a <a href="flowchart.pdf">flowchart</a> summarizing this.
+</p>
+
+
+<div class="figure">
+<p><a href="flowchart.pdf"><img src="flowchart.png" alt="flowchart.png" /></a>
+</p>
+</div>
+
+<p>
+The <code>star_info</code> structure contains all the information about the star
+that is being evolved.  By convention, the variable name <code>s</code> is used
+throughout <code>run_star_extras.f</code> to refer to this structure.  In
+Fortran, the percent (%) operator is used to access the components of
+the structure.  (So you can read <code>s% x = 3</code> in the same way that you
+would read <code>s.x = 3</code> in C.)
+</p>
+
+<p>
+The <code>star_info</code> structure contains the stellar model itself (i.e.,
+zoning information, thermodynamic profile, composition profile).
+These components are listed in the file
+<code>$MESA_DIR/star/public/star_data.inc</code>.  In addition, <code>star_info</code>
+contains the values for the parameters that you set in your <code>controls</code>
+inlist (i.e., <code>initial_mass</code>, <code>xa_central_lower_limit</code>).  Recall that
+the list of controls is located in <a href="http://mesa.sourceforge.net/controls_defaults.html"><code>$MESA_DIR/star/defaults/controls.defaults</code></a>.
+</p>
+
+<p>
+There is one set of controls that will prove useful time and time
+again when using <code>run_star_extras.f</code> and that is <code>x_ctrl</code>,
+<code>x_integer_ctrl</code>, and <code>x_logical_ctrl</code>.  These are arrays (of length
+100 by default) of double precision, integer, and boolean values.  You
+can set the elements in your inlists
+</p>
+<div class="org-src-container">
+
+<pre class="src src-f90">&amp;controls
+  x_ctrl(1) = 3.14
+  x_ctrl(2) = 2.78
+  x_integer_ctrl(1) = 42
+  x_logical_ctrl(1) = true
+/ <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">end of controls inlist</span>
+</pre>
+</div>
+<p>
+and access them later on as part of the star structure (i.e., <code>s%
+ x_ctrl(1)</code>, etc.).
+</p>
+</div>
+
+
+<div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13">Part 2a: Monitoring your models</h4>
+<div class="outline-text-4" id="text-orgheadline13">
+</div><div id="outline-container-orgheadline10" class="outline-5">
+<h5 id="orgheadline10">Task 0 (Example): Add a stopping condition based on radius</h5>
+<div class="outline-text-5" id="text-orgheadline10">
+<p>
+Suppose I want to stop when the star reaches a given radius.  I look
+in <code>controls.defaults</code> and such a condition doesn't seem to exist.
+How do I do this?
+</p>
+
+<p>
+First, look at how the routines in <code>run_star_extras.f</code> fit into a MESA
+run.  To decide whether to terminate, I want to check the value of the
+radius after each step.  Thus, I want the subroutine that is called
+after each step, which is <code>extras_finish_step</code>.
+</p>
+
+<p>
+Now, I need to figure out how to access the stellar radius.  I open up
+<code>star/public/star_data.inc</code> and start looking around.  If I search for
+the word radius, I quickly see that MESA says "r(k) is radius at outer
+edge of cell k".  (In MESA, the outermost zone is at k=1 and the
+innermost zone is at k=s% nz.)  Therefore, the radius of the star is
+<code>s% r(1)</code>.
+</p>
+
+<p>
+MESA uses cgs units unless otherwise noted.  The most common non-cgs
+units are solar units.  MESA defines its constants in
+<code>$MESA_DIR/const/public/const_def.f</code>.  Since the <code>run_star_extras</code>
+module includes the line <code>use const_def</code>, we will be able to access
+these values.  Using the built in constants lets us make sure we're
+using exactly the same definitions as MESA.  The constant with the
+value of the solar radius (in cm) is named <code>Rsun</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-f90"><span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">returns either keep_going or terminate.</span>
+<span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">note: cannot request retry or backup; extras_check_model can do that.</span>
+<span style="color: #98fb98;">integer </span><span style="color: #00ffff;">function</span><span style="color: #eedd82;"> </span><span style="color: #87cefa;">extras_finish_step</span><span style="color: #FFFFFF; background-color: #000000;">(s, id, id_extra)</span>
+   <span style="color: #98fb98;">type (star_info)</span>, <span style="color: #00ffff;">pointer</span> :: <span style="color: #eedd82;">s</span>
+   <span style="color: #98fb98;">integer</span>, <span style="color: #00ffff;">intent</span>(in) ::<span style="color: #eedd82;"> id, id_extra</span>
+   <span style="color: #98fb98;">integer</span> ::<span style="color: #eedd82;"> ierr</span>
+   extras_finish_step = keep_going
+   <span style="color: #00ffff;">call</span> <span style="color: #87cefa;">store_extra_info</span>(s)
+
+   <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">stop when the star grows larger than 1.2x solar radii</span>
+   <span style="color: #00ffff;">if</span> (s% r(1) &gt; 1.2 * Rsun) extras_finish_step = terminate
+
+   <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">to save a profile,</span>
+      <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">s% need_to_save_profiles_now = .true.</span>
+   <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">to update the star log,</span>
+      <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">s% need_to_update_history_now = .true.</span>
+
+   <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">see extras_check_model for information about custom termination codes</span>
+   <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">by default, indicate where (in the code) MESA terminated</span>
+   <span style="color: #00ffff;">if</span> (extras_finish_step == terminate) s% termination_code = t_extras_finish_step
+<span style="color: #00ffff;">end function</span> <span style="color: #87cefa;">extras_finish_step</span>
+</pre>
+</div>
+
+<p>
+Now, recompile your working directory
+</p>
+<pre class="example">
+./mk
+</pre>
+<p>
+You will need to do this step each and every time you edit
+<code>run_star_extras.f</code>.
+</p>
+
+<p>
+Edit your <code>inlist_project</code> and comment out the luminosity-based
+stopping condition we added earlier.  We won't use it again.
+</p>
+
+<p>
+Now start the model again from the beginning
+</p>
+<pre class="example">
+./rn
+</pre>
+<p>
+This run should halt around step 58.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-5">
+<h5 id="orgheadline11">Task 1: Find the minimum radius</h5>
+<div class="outline-text-5" id="text-orgheadline11">
+<p>
+As the model evolved onto the main sequence, its radius decreased.  As
+it evolved along the main sequence, its radius increased.  Use
+run_star_extras to find the minimum radius.  At the end of the run,
+print this minimum radius (in solar radii).
+</p>
+
+<p>
+You can receive valuable MESA bonus points if your routine works even
+if you do a restart (e.g., <code>./re x050</code>).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline12" class="outline-5">
+<h5 id="orgheadline12">Task 2: Stop when the star expands</h5>
+<div class="outline-text-5" id="text-orgheadline12">
+<p>
+The inlist in Task 1 stopped at hydrogen exhaustion.  Instead, stop
+when the radius of the star exceeds some multiple of the minimum
+radius.  Allow the user to specify this value in the <b>inlist</b>.  For
+this example, input 2.0 as the multiple.
+</p>
+
+<p>
+You can receive valuable MESA bonus points if your routine stops when
+the radius of the star <b>is</b> a user-specified multiple of the minimum
+radius.  (Define <b>is</b> to be within a one part in a million.)
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-4">
+<h4 id="orgheadline14">Part 2b: Changing controls on-the-fly</h4>
+<div class="outline-text-4" id="text-orgheadline14">
+<p>
+Recall that <code>star_info</code> contains the values for the parameters that
+you set in your <code>controls</code> inlist.  That also means that you can set
+the value of these parameters by modifying the <code>star_info</code> structure.
+Since <code>run_star_extras</code> gives us hooks to access to the <code>star_info</code> at
+each step, that means we can modify parameters as the run proceeds.
+This often saves us the hassle of stopping, saving a model, editing
+the inlist, and restarting.
+</p>
+</div>
+<div id="outline-container-orgheadline15" class="outline-5">
+<h5 id="orgheadline15">Task 3: Turn on mass loss when the star reaches 2 Rsun</h5>
+<div class="outline-text-5" id="text-orgheadline15">
+<p>
+Imagine that the star is in a close binary.  As it expands, it might
+fill its Roche lobe and begin transferring mass.  Instead of stopping,
+when the star reaches two solar radii, use <code>run_star_extras</code> to turn
+on mass loss (at a rate of 1.5e-9 Msun/yr).
+</p>
+
+<p>
+Use your inlists to stop when the mass of the star falls to 0.9 Msun.
+</p>
+
+<p>
+You can receive valuable MESA bonus points if you use your inlist to
+tell MESA to only allow the mass to change by a fractional part of
+0.001 in each timestep.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-4">
+<h4 id="orgheadline16">Part 2c: Changing input physics</h4>
+<div class="outline-text-4" id="text-orgheadline16">
+<p>
+MESA provides hooks to override its built-in physics routines.  These
+are referred to as "other" routines.  There are two main steps needed
+to take advantage of this functionality: (1) writing the other routine
+and (2) instructing MESA to use this routine.
+</p>
+
+<p>
+Navigate to <code>$MESA_DIR/star/other</code>, where you will see a set of files
+named with the pattern other_*.f.  In general, find the one
+corresponding to the physics (or numerics) that you want to alter.
+Open it up and read through it.  Many of the files contain comments
+and examples.
+</p>
+
+<p>
+Note that we do not want to directly edit these files.  Instead we
+want to copy the template routine into our copy of <code>run_star_extras.f</code>
+and then further modify it there.  The template routines are named
+either null_other_* or default_other_*.
+</p>
+
+<p>
+In this example, we will focus on <code>other_wind.f</code>.  Open up this file.
+Copy the subroutine <code>null_other_wind</code> and paste it into your
+<code>run_star_extras.f</code>.  It should be at the same "level" as the other
+subroutines in that file (that is, contained within the
+<code>run_star_extras</code> module.).  Rename it to <code>lecture1_other_wind</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-f90"><span style="color: #00ffff;">subroutine</span> <span style="color: #87cefa;">lecture1_other_wind</span>(id, Lsurf, Msurf, Rsurf, Tsurf, w, ierr)
+   <span style="color: #00ffff;">use</span> <span style="color: #87cefa;">star_def</span>
+   <span style="color: #98fb98;">integer</span>, <span style="color: #00ffff;">intent</span>(in) ::<span style="color: #eedd82;"> id</span>
+   <span style="color: #98fb98;">real</span>(dp), <span style="color: #00ffff;">intent</span>(in) ::<span style="color: #eedd82;"> Lsurf, Msurf, Rsurf, Tsurf </span><span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">surface values (cgs)</span>
+   <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">NOTE: surface is outermost cell. not necessarily at photosphere.</span>
+   <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">NOTE: don't assume that vars are set at this point.</span>
+   <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">so if you want values other than those given as args,</span>
+   <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">you should use values from s% xh(:,:) and s% xa(:,:) only.</span>
+   <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">rather than things like s% Teff or s% lnT(:) which have not been set yet.</span>
+   <span style="color: #98fb98;">real</span>(dp), <span style="color: #00ffff;">intent</span>(out) ::<span style="color: #eedd82;"> w </span><span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">wind in units of Msun/year (value is &gt;= 0)</span>
+   <span style="color: #98fb98;">integer</span>, <span style="color: #00ffff;">intent</span>(out) ::<span style="color: #eedd82;"> ierr</span>
+   w = 0
+   ierr = 0
+<span style="color: #00ffff;">end subroutine</span> <span style="color: #87cefa;">lecture1_other_wind</span>
+</pre>
+</div>
+
+<p>
+If you read the comments in <code>other_wind.f</code> (and you should), you can
+see that the file tells us how to have MESA use our other_* routine.
+Perform these steps (hint: you will need to edit both your in
+<code>run_star_extras.f</code> and your inlists).
+</p>
+</div>
+
+<div id="outline-container-orgheadline17" class="outline-5">
+<h5 id="orgheadline17">Task 4: Add a wind that depends on the radius</h5>
+<div class="outline-text-5" id="text-orgheadline17">
+<p>
+Activating mass loss once we reach a certain radius can be thought of
+as using a radius-dependent wind prescription.  Use the <code>other_wind</code>
+hook to implement such a prescription and redo Task 3 using this
+approach.  (Make sure to comment out or remove the code that you
+previously used to switch on mass loss.)
+</p>
+
+<p>
+You can receive valuable MESA bonus points if your routine allows for
+a user-specified radius and mass loss rate.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18">Part 3: Evolving Binary Stars</h3>
+<div class="outline-text-3" id="text-orgheadline18">
+<p>
+The binary capabilities have been a major focus of MESA development in
+recent years.
+</p>
+
+<p>
+Each time you want to start a MESA binary project, you should make a
+new copy of the binary/work directory.
+</p>
+<pre class="example">
+cp -r $MESA_DIR/binary/work lecture1-binary
+</pre>
+<p>
+In this case, we have prepared and provided a work directory for
+you. <a href="lecture1-binary.zip">Download</a>, unpack, and enter this work directory.
+</p>
+
+<pre class="example">
+unzip lecture1-binary.zip
+cd lecture1-binary
+</pre>
+
+<p>
+The contents of the <code>binary/work</code> directory should look similar to a
+standard star work directory, only doubled.  There are now two inlists
+(called <code>inlist1</code> and <code>inlist2</code>) and two LOGS directories (called
+<code>LOGS1</code> and <code>LOGS2</code>).
+</p>
+
+<p>
+The file <code>inlist_project</code> now contains the <i>binary</i> namelists
+<code>&amp;binary_job</code> and <code>&amp;binary_controls</code>.  These have analogous roles to
+the <code>&amp;star_job</code> and <code>&amp;controls</code> namelists in a regular <code>star/work</code>
+directory.
+</p>
+
+<p>
+There are only a few possible controls in <code>&amp;binary_job</code>, which are
+documented in <code>$MESA_DIR/binary/defaults/binary_job.defaults</code>. This is
+where you specify the inlists for each of the stellar models (via
+<code>inlist_names</code>).  Those files will be regular inlists for MESA/star,
+where you can load/save models, change nuclear networks, do what
+you're used to doing in MESA/star.  You also choose whether to evolve
+both stars (one star could be a point mass) and whether to follow
+Roche lobe overflow.  In this example, our <code>binary_job</code> namelist is
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-f90">&amp;binary_job
+
+  <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">each star has its own inlists</span>
+    inlist_names(1) = <span style="color: #ffa07a;">'inlist1'</span>
+    inlist_names(2) = <span style="color: #ffa07a;">'inlist2'</span>
+
+  <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">in this example, we will treat star 2 as a point mass</span>
+    evolve_both_stars = <span style="color: #00ffff;">.false.</span>
+
+/ <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">end of binary_job namelist</span>
+</pre>
+</div>
+
+<p>
+The options in the <code>&amp;binary_controls</code> inlists, which may be more
+unfamiliar, are documented in
+<a href="http://mesa.sourceforge.net/binary_controls_defaults.html"><code>$MESA_DIR/binary/defaults/binary_controls.defaults</code></a>.  Most
+importantly, this is where we set the initial orbit of the binary and
+determine how mass and angular momentum are transferred.
+</p>
+
+<p>
+In this example, our <code>binary_controls</code> namelist is
+</p>
+<div class="org-src-container">
+
+<pre class="src src-f90">&amp;binary_controls
+
+  <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">in inlist1, we will load a saved model for star1</span>
+
+  <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">since star2 is a point mass, we need to set its mass (in Msun)</span>
+    m2 = 1.4
+
+  <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">we need to set the initial orbital properties of the binary</span>
+    initial_period_in_days = -1  <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">-1 means ignore this</span>
+
+  <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">use implicit Roche lobe overflow</span>
+    max_tries_to_achieve = 10
+
+  <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">transfer efficiency controls</span>
+    limit_retention_by_mdot_edd = <span style="color: #00ffff;">.false.</span>
+
+  <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">turn off magnetic braking in this example</span>
+    do_jdot_mb = <span style="color: #00ffff;">.false.</span>
+
+/ <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">end of binary_controls namelist</span>
+</pre>
+</div>
+
+<p>
+Again, <code>binary</code> behaves much like <code>star</code>, so before you can run you
+must issue the command
+</p>
+<pre class="example">
+./mk
+</pre>
+</div>
+
+<div id="outline-container-orgheadline19" class="outline-4">
+<h4 id="orgheadline19">Task 1: Evolve a binary (one star + point mass)</h4>
+<div class="outline-text-4" id="text-orgheadline19">
+<p>
+The stated motivation for our experimentation with single star mass
+loss was that the star was overflowing its Roche lobe.  Using the
+binary module, we can follow this more self-consistently.
+</p>
+
+<p>
+Use the <code>binary_controls</code> inlist to choose the initial semi-major axis
+of your binary system to be 6 Rsun.  With this separation, the star
+will overfill its Roche lobe when it reaches a radius of approximately
+2 Rsun, the radius we were using earlier.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline20" class="outline-4">
+<h4 id="orgheadline20">Task 2: Evolve a binary (two stars)</h4>
+<div class="outline-text-4" id="text-orgheadline20">
+<p>
+The binary module can also simultaneously evolve two stars.  We have
+provided a model <code>0.8M_at_ZAMS.mod</code>.  Change from having a point mass
+as star 2 to using this saved model as star 2.  Start this binary
+system with an initial orbital period of 16 hours.
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Josiah Schwab and Emily Leiner</p>
+<p class="date">Created: 2015-08-09 Sun 21:37</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

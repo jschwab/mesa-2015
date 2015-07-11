@@ -1,0 +1,302 @@
+\documentclass[x11names, 12pt]{article}
+
+% this is based on
+% http://www.texample.net/tikz/examples/flexible-flow-chart/
+
+% use half-inch margins
+\usepackage[margin=0.5in]{geometry}
+
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+
+\usetikzlibrary{shapes,arrows,chains}
+
+\begin{document}
+\pagestyle{empty}
+
+% -------------------------------------------------
+% Set up a new layer for the debugging marks, and make sure it is on
+% top
+\pgfdeclarelayer{marx}
+\pgfsetlayers{main,marx}
+
+% A macro for marking coordinates (specific to the coordinate naming
+% scheme used here). Swap the following 2 definitions to deactivate
+% marks.
+\providecommand{\cmark}[2][]{\relax}
+\providecommand{\cmark}[2][]{%
+  \begin{pgfonlayer}{marx}
+    \node [nmark] at (c#2#1) {#2};
+  \end{pgfonlayer}{marx}
+  }
+
+% -------------------------------------------------
+% Start the picture
+\begin{tikzpicture}[%
+    >=triangle 60,              % Nice arrows; your taste may be different
+    start chain=going below,    % General flow is top-to-bottom
+    node distance=6mm and 12mm, % Global setup of box spacing
+    every join/.style={norm},   % Default linetype for connecting boxes
+    ]
+% -------------------------------------------------
+% A few box styles
+% <on chain> *and* <on grid> reduce the need for manual relative
+% positioning of nodes
+\tikzset{
+  base/.style={draw, on chain, on grid, align=center, minimum height=4ex, text centered, inner sep=3pt},
+  endpoint/.style={base, rounded rectangle, text width=4em},
+  io/.style={base, trapezium, trapezium left angle=60, trapezium right angle=-60, text width=5.0em},
+  hook/.style={base, rectangle, text width = 10em},
+  block/.style={base, rectangle, rounded corners, text width=8em},
+  rse/.style={base, rectangle, rounded corners, minimum width=6cm, minimum height=2cm},
+  decision/.style={base, diamond, aspect=1.5, text width=4em},
+  % coord node style is used for placing corners of connecting lines
+  coord/.style={coordinate, on chain, on grid, node distance=6mm and 12mm},
+  % nmark node style is used for coordinate debugging marks
+  nmark/.style={draw, cyan, circle, font={\sffamily\bfseries}},
+  % -------------------------------------------------
+  % Connector line styles for different parts of the diagram
+  norm/.style={->, draw},
+  it/.style={font={\itshape}}
+}
+
+
+% Start by placing the nodes
+
+\node [endpoint] (p0) {start};
+\node [io, join] (inlists) {read inlists};
+\node [hook, join] (controls) {\tt extras\_controls};
+\node [io, join] (model) {read model};
+\node [hook, join] (startup) {\tt extras\_startup};
+
+\node [block, below right = of startup.south] (beforestep) {prepare for a step};
+\node [block, below right = of beforestep.south] (takestep) {take step};
+\node [block, join] (check) {check model};
+\node [hook, join] (checkmodel) {\tt extras\_check\_model};
+
+\node [decision, join] (again) {redo, retry, backup?};
+
+\node [coord, below = of again.south] (c5)  {}; \cmark{5}
+\node [coord, left = 30mm of c5] (c6)  {}; \cmark{6}
+
+\node [block, below = 3mm of c6] (afterstep) {finish step};
+\node [hook, join] (finishstep) {\tt extras\_finish\_step};
+\node [io, join] (write) {write data};
+\node [decision, join] (continue) {keep going?};
+
+\node [coord, below = of continue.south] (c7)  {}; \cmark{7}
+\node [coord, left = 30mm of c7] (c8)  {}; \cmark{8}
+
+\node [hook, below = 3mm of c8] (afterevolve) {\tt extras\_after\_evolve};
+% \node [hook, below left = 6mm and 12 mm of continue.south] (afterevolve) {\tt 
+\node [endpoint, join] (end) {end};
+
+\node [rse, right = 120mm of controls] (rse_ec) {};
+\node [rse, right = 120mm of startup] (rse_es) {};
+\node [rse, right = 60mm of checkmodel] (rse_ecm) {};
+\node [rse, right = 90mm of finishstep] (rse_efs) {};
+\node [rse, right = 120mm of afterevolve] (rse_eae) {};
+
+\draw[dashed, thick, color=gray] (controls) -- (rse_ec);
+\draw[dashed, thick, color=gray] (startup) -- (rse_es);
+\draw[dashed, thick, color=gray] (checkmodel) -- (rse_ecm);
+\draw[dashed, thick, color=gray] (finishstep) -- (rse_efs);
+\draw[dashed, thick, color=gray] (afterevolve) -- (rse_eae);
+
+\node [coord, below = of continue.south] (c0) {}; \cmark{0}
+
+\node [coord, below = of startup] (c1)  {}; \cmark{1}
+\node [coord, above = of beforestep] (c2)  {}; \cmark{2}
+
+\node [coord, below = of beforestep] (c3)  {}; \cmark{3}
+\node [coord, above = of takestep] (c4)  {}; \cmark{4}
+
+% \node [coord, below = of again.south] (c5)  {}; \cmark{5}
+% \node [coord, above = of afterstep] (c6)  {}; \cmark{6}
+
+% \node [coord, below = of continue.south] (c7)  {}; \cmark{7}
+% \node [coord, above = of afterevolve] (c8)  {}; \cmark{8}
+
+\draw [->] (startup.south) -- (c1) |- (c2) -- (beforestep.north);
+\draw [->] (beforestep.south) -- (c3) |- (c4) -- (takestep.north);
+
+\node [coord, left = 30mm of takestep.center] (l1)  {}; \cmark{1}
+\node [coord, left = 30mm of again.center] (l2)  {}; \cmark{2}
+
+\node [coord, left = 30mm of beforestep.center] (l3)  {}; \cmark{3}
+\node [coord, left = 30mm of continue.center] (l4)  {}; \cmark{4}
+
+\draw [->] (again.west) to node [near start, yshift=0.5em, xshift=-0.5em] {yes} (l2) to node [xshift=-1em, rotate=90, it] {step loop} (l1) -- (takestep.west);
+
+\draw [->] (continue.west) to node [near start, yshift=0.5em, xshift=-0.5em] {yes} (l4) to node [xshift=-1em, rotate=90, it] {evolve loop} (l3) -- (beforestep.west);
+
+\draw [->] (again.south) to node [near start, xshift=-1em] {no} (c5) -- (c6) -- (afterstep.north);
+\draw [->] (continue.south) to node [near start, xshift=-1em] {no} (c7) -- (c8) -- (afterevolve.north);
+
+\end{tikzpicture}
+% =================================================
+\end{document}
+% % -------------------------------------------------
+
+
+% % subroutine run1_star(...)
+
+% %    ! star is initialized here
+
+% %    ! before evolve loop calls:
+% %    !   extras_startup
+% %    !   extras_controls
+% %    call before_evolve_loop(...)
+
+% %    ! evolve one step per loop
+% %    evolve_loop: do while(continue_evolve_loop)
+
+% %       call before_step_loop(...)
+
+% %       step_loop: do ! may need to repeat this loop
+
+% %          if (stop_is_requested(s)) then
+% %             continue_evolve_loop = .false.
+% %             result = terminate
+% %             exit
+% %          end if
+
+% %          result = star_evolve_step(...)
+% %          if (result == keep_going) result = star_check_model(...)
+% %          if (result == keep_going) result = extras_check_model(...)
+% %          if (result == keep_going) result = star_pick_next_timestep(...)
+% %          if (result == keep_going) exit step_loop
+
+% %          ! redo, retry, or backup must be done inside the step_loop
+
+% %          if (result == redo) then
+% %             result = star_prepare_to_redo(...)
+% %          end if
+% %          if (result == retry) then
+% %             result = star_prepare_to_retry(...)
+% %          end if
+% %          if (result == backup) then
+% %             result = star_do1_backup(...)
+% %             just_did_backup = .true.
+% %          else
+% %             just_did_backup = .false.
+% %          end if
+% %          if (result == terminate) then
+% %             continue_evolve_loop = .false.
+% %             exit step_loop
+% %          end if
+
+% %       end do step_loop
+
+% %       ! once we get here, the only options are keep_going or terminate.
+
+% %       ! after_step_loop calls:
+% %       !   extras_finish_step
+% %       call after_step_loop(...)
+
+% %       if (result /= keep_going) then
+% %          exit evolve_loop
+% %       end if
+
+% %       ! write out data
+% %       !
+% %       ! do_saves calls:
+% %       !   how_many_extra_history_columns
+% %       !   data_for_extra_history_columns
+% %       !   how_many_extra_profile_columns
+% %       !   data_for_extra_profile_columns
+% %       call do_saves(...)
+
+% %    end do evolve_loop
+
+% %    ! after_evolve_loop calls:
+% %    !   extras_after_evolve
+% %    call after_evolve_loop(...)
+
+% % end subroutine run1_star
+
+% % Define block styles
+% \tikzstyle{endpoint} = [rounded rectangle, draw,
+%     text width=4em, text badly centered, inner sep=3pt]
+% \tikzstyle{io} = [trapezium, draw,
+%     trapezium left angle=70, trapezium right angle=-70,
+%     text width=6em, text badly centered, inner sep=3pt]
+% \tikzstyle{hook} = [rectangle, draw, text badly centered, text width = 10em, inner sep=3pt]
+% \tikzstyle{block} = [rectangle, draw,
+%     text width=8em, text centered, rounded corners]
+% \tikzstyle{decision} = [diamond, draw,
+%     text width=4em, text badly centered, inner sep=3pt]
+% \tikzstyle{line} = [draw, -latex']
+
+% \begin{tikzpicture}[node distance = 1.25cm, auto]
+
+%     \node [endpoint] (start) {start};
+%     \node [io, below of=start] (inlists) {read inlists};
+%     \node [hook, below of=inlists] (controls) {\tt extra\_controls};
+%     \node [io, below of=controls] (model) {read model};
+%     \node [hook, below of=model] (startup) {\tt extra\_startup};
+
+%     \node [block, below right = 1.5cm and 1.0cm of startup] (beforestep) {prepare for a step};
+
+%     \node [block, below right = 1.5cm and 1.0cm of beforestep] (takestep) {take step};
+%     \node [block, below of=takestep] (check) {check model};
+%     \node [hook, below of=check] (checkmodel) {\tt extras\_check\_model};
+%     \node [decision, below = 0.75 cm of checkmodel] (again) {redo, retry, backup?};
+
+%     \node [block, below left = 1.5cm and 1.0cm of again] (afterstep) {finish step};
+%     \node [hook, below of=afterstep] (finishstep) {\tt extras\_finish\_step};
+%     \node [io, below of=finishstep] (write) {write data};
+%     \node [decision, below of=write] (continue) {keep going?};
+
+%     \node [hook, below left = 1.5cm and 1.0cm of continue] (afterevolve) {\tt extra\_after\_evolve};
+%     \node [endpoint, below of=afterevolve] (end) {end};
+
+%     \node [left of = check] (eloop) {evolve loop};
+
+%     % \node [block, below of=bel] (ael) {after evolve loop};
+%     % \node [block, below right of=bel] (bsl) {before step loop};
+%     % \node [block, above right of=ael] (asl) {after step loop};
+%     % \node [cloud, below of=bsl] (evolve) {evolve!};
+%     % \node [block, below of=evolve] (check) {check model};
+
+%     % Draw edges
+%     \path [line, thick] (start) -- (inlists);
+%     \path [line, thick] (inlists) -- (controls);
+%     \path [line, thick] (controls) -- (model);
+%     \path [line, thick] (model) -- (startup);
+
+%     \path [line, thick, bend left] (startup) -- (beforestep);
+%     \path [line, thick] (startup) -- (beforestep);
+
+%     \path [line, thick] (takestep) -- (check);
+%     \path [line, thick] (check) -- (checkmodel);
+%     \path [line, thick] (checkmodel) -- (again);
+
+%     % \path [line, thick] (again) -| node [near start] {yes} |- (takestep);
+%     \path [line, thick] (again) |- node [near start] {no} (afterstep);
+
+%     \path [line, thick] (continue) -| node {yes} (beforestep);
+%     \path [line, thick] (continue) -- node {no} (afterevolve);
+
+%     \path [line, thick] (afterevolve) -- (end);
+
+%     % \path [line] (identify) -- (evaluate);
+%     % \path [line] (evaluate) -- (decide);
+
+%     % \path [line] (update) |- (identify);
+
+%     % \path [line,dashed] (expert) -- (init);
+%     % \path [line,dashed] (system) -- (init);
+%     % \path [line,dashed] (system) |- (evaluate);
+
+%     \draw [->,thick] (again) |- node [black, near end, yshift=0.75em, it]
+%     {(When message + resources available)} (start);
+% \end{tikzpicture}
+
+
+% \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
