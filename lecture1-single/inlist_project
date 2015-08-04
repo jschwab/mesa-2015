@@ -1,0 +1,35 @@
+! MESA Summer School 2015: Lecture 1
+! Part 1: Evolving a Single Star
+! Part 2: Using run_star_extras.f
+! Josiah Schwab & Emily Leiner
+
+&star_job
+
+  ! load a saved model
+    load_saved_model = .true.
+    saved_model_name = '1M_on_PMS.mod'
+
+  ! display on-screen plots
+    pgstar_flag = .true.
+
+  ! pause just before MESA exits
+    pause_before_terminate = .true.
+
+/ !end of star_job namelist
+
+
+&controls
+
+  ! starting specifications
+    initial_mass = 1 ! in Msun units
+
+  ! stop at central hydrogen depletion
+    xa_central_lower_limit_species(1) = 'h1'
+    xa_central_lower_limit(1) = 1d-3
+
+  ! reduce the spatial and temporal resolution of the models
+  ! faster runs let us cover more material in lecture
+    varcontrol_target = 1e-3
+    mesh_delta_coeff = 3.0
+
+/ ! end of controls namelist
