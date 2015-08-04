@@ -24,8 +24,11 @@
     initial_mass = 1 ! in Msun units
 
   ! stop at central hydrogen depletion
-    xa_central_lower_limit_species(1) = 'h1'
-    xa_central_lower_limit(1) = 1d-3
+    ! xa_central_lower_limit_species(1) = 'h1'
+    ! xa_central_lower_limit(1) = 1d-3
+
+  ! stop when L exceeds 2 Lsun
+    log_L_upper_limit = 0.30103 ! log10(2.0)
 
   ! reduce the spatial and temporal resolution of the models
   ! faster runs let us cover more material in lecture
