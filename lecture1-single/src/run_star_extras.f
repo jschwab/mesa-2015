@@ -32,6 +32,9 @@
       integer, parameter :: extra_info_get = 2
       integer, parameter :: extra_info_put = 3
 
+      ! variable to hold minimum radius
+      real(dp) :: min_R
+
       ! these routines are called by the standard run_star check_model
       contains
 
@@ -60,6 +63,7 @@
          if (ierr /= 0) return
          extras_startup = 0
          if (.not. restart) then
+            min_R = s% r(1)
             call alloc_extra_info(s)
          else ! it is a restart
             call unpack_extra_info(s)
@@ -175,6 +179,10 @@
          call star_ptr(id, s, ierr)
          if (ierr /= 0) return
          extras_finish_step = keep_going
+
+         ! track the minimum radius
+         min_R = min(min_R, s% r(1))
+         
          call store_extra_info(s)
 
          ! stop when the star grows larger than 1.2x solar radii
@@ -198,6 +206,10 @@
          ierr = 0
          call star_ptr(id, s, ierr)
          if (ierr /= 0) return
+
+         ! output the minimum radius in solar units
+         write(*,*) 'Minimum radius (Rsun): ', min_R/Rsun
+         
       end subroutine extras_after_evolve
 
 
