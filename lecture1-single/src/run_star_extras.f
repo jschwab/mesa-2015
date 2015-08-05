@@ -182,11 +182,11 @@
 
          ! track the minimum radius
          min_R = min(min_R, s% r(1))
-         
+
          call store_extra_info(s)
 
-         ! stop when the star grows larger than 1.2x solar radii
-         if (s% r(1) > 1.2 * Rsun) extras_finish_step = terminate
+         ! stop when the star grows larger than ? x the min radius
+         if (s% r(1) > s% x_ctrl(1) * min_R) extras_finish_step = terminate
 
          ! to save a profile,
             ! s% need_to_save_profiles_now = .true.
@@ -209,7 +209,10 @@
 
          ! output the minimum radius in solar units
          write(*,*) 'Minimum radius (Rsun): ', min_R/Rsun
-         
+
+         ! output the final radius / minimum radius
+         write(*,*) 'Final radius (R/Rmin): ', s% r(1)/min_R
+
       end subroutine extras_after_evolve
 
 

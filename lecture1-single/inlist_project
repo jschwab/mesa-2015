@@ -35,4 +35,7 @@
     varcontrol_target = 1e-3
     mesh_delta_coeff = 3.0
 
+  ! stop when R > x_ctrl(1) * the minimum radius
+    x_ctrl(1) = 2.0
+
 / ! end of controls namelist
