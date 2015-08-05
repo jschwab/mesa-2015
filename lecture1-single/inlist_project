@@ -28,7 +28,7 @@
     ! xa_central_lower_limit(1) = 1d-3
 
   ! stop when L exceeds 2 Lsun
-    log_L_upper_limit = 0.30103 ! log10(2.0)
+    ! log_L_upper_limit = 0.30103 ! log10(2.0)
 
   ! reduce the spatial and temporal resolution of the models
   ! faster runs let us cover more material in lecture

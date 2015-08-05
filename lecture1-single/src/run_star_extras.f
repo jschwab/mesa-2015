@@ -177,6 +177,9 @@
          extras_finish_step = keep_going
          call store_extra_info(s)
 
+         ! stop when the star grows larger than 1.2x solar radii
+         if (s% r(1) > 1.2 * Rsun) extras_finish_step = terminate
+
          ! to save a profile,
             ! s% need_to_save_profiles_now = .true.
          ! to update the star log,
