@@ -243,9 +243,9 @@
          ! call move_int or move_flg
          num_ints = i
 
-         i = 0
+         i = 1
          ! call move_dbl
-
+         call move_dbl(min_R)
          num_dbls = i
 
          if (op /= extra_info_alloc) return
