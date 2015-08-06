@@ -185,8 +185,8 @@
 
          call store_extra_info(s)
 
-         ! stop when the star grows larger than ? x the min radius
-         if (s% r(1) > s% x_ctrl(1) * min_R) extras_finish_step = terminate
+         ! turn on mass loss when the star grows larger than ? x Rsun
+         if (s% r(1) > s% x_ctrl(1) * Rsun) s% mass_change = -1.5e-9
 
          ! to save a profile,
             ! s% need_to_save_profiles_now = .true.
