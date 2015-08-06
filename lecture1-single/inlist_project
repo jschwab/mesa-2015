@@ -41,4 +41,7 @@
   ! stop when the mass falls below 0.9 Msun
     star_mass_min_limit = 0.9
 
+  ! use the other wind hook
+    use_other_wind = .true.
+
 / ! end of controls namelist

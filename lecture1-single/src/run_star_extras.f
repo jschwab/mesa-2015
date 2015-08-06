@@ -38,6 +38,23 @@
       ! these routines are called by the standard run_star check_model
       contains
 
+      subroutine lecture1_other_wind(id, Lsurf, Msurf, Rsurf, Tsurf, w, ierr)
+         use star_def
+         integer, intent(in) :: id
+         real(dp), intent(in) :: Lsurf, Msurf, Rsurf, Tsurf ! surface values (cgs)
+         ! NOTE: surface is outermost cell. not necessarily at photosphere.
+         ! NOTE: don't assume that vars are set at this point.
+         ! so if you want values other than those given as args,
+         ! you should use values from s% xh(:,:) and s% xa(:,:) only.
+         ! rather than things like s% Teff or s% lnT(:) which have not been set yet.
+         real(dp), intent(out) :: w ! wind in units of Msun/year (value is >= 0)
+         integer, intent(out) :: ierr
+         w = 0
+         if (Rsurf > 2 * Rsun) w = 1.5e-9
+         ierr = 0
+      end subroutine lecture1_other_wind
+
+
       subroutine extras_controls(id, ierr)
          integer, intent(in) :: id
          integer, intent(out) :: ierr
@@ -48,7 +65,7 @@
 
          ! this is the place to set any procedure pointers you want to change
          ! e.g., other_wind, other_mixing, other_energy  (see star_data.inc)
-
+         s% other_wind => lecture1_other_wind
 
       end subroutine extras_controls
 
@@ -184,9 +201,6 @@
          min_R = min(min_R, s% r(1))
 
          call store_extra_info(s)
-
-         ! turn on mass loss when the star grows larger than ? x Rsun
-         if (s% r(1) > s% x_ctrl(1) * Rsun) s% mass_change = -1.5e-9
 
          ! to save a profile,
             ! s% need_to_save_profiles_now = .true.
