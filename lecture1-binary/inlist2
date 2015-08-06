@@ -9,6 +9,10 @@
   ! display on-screen plots
     pgstar_flag = .true.
 
+  ! load a saved model
+    load_saved_model = .true.
+    saved_model_name = '0.8M_at_ZAMS.mod'
+
 / !end of star_job namelist
 
 

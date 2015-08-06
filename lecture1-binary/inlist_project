@@ -8,21 +8,18 @@
     inlist_names(1) = 'inlist1'
     inlist_names(2) = 'inlist2'
 
-  ! in this example, we will treat star 2 as a point mass
-    evolve_both_stars = .false.
+  ! in this example, we will evolve both stars
+    evolve_both_stars = .true.
 
 / ! end of binary_job namelist
 
 &binary_controls
 
   ! in inlist1, we will load a saved model for star1
-
-  ! since star2 is a point mass, we need to set its mass (in Msun)
-    m2 = 1.4
+  ! in inlist2, we will load a saved model for star2
 
   ! we need to set the initial orbital properties of the binary
-    initial_period_in_days = -1  ! -1 means ignore this
-    initial_separation_in_Rsuns = 6.0
+    initial_period_in_days = 0.667
 
   ! use implicit Roche lobe overflow
     max_tries_to_achieve = 10
