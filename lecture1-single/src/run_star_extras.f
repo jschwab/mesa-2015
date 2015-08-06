@@ -40,7 +40,9 @@
 
       subroutine lecture1_other_wind(id, Lsurf, Msurf, Rsurf, Tsurf, w, ierr)
          use star_def
+         use star_lib, only: star_ptr
          integer, intent(in) :: id
+         type (star_info), pointer :: s
          real(dp), intent(in) :: Lsurf, Msurf, Rsurf, Tsurf ! surface values (cgs)
          ! NOTE: surface is outermost cell. not necessarily at photosphere.
          ! NOTE: don't assume that vars are set at this point.
@@ -49,8 +51,14 @@
          ! rather than things like s% Teff or s% lnT(:) which have not been set yet.
          real(dp), intent(out) :: w ! wind in units of Msun/year (value is >= 0)
          integer, intent(out) :: ierr
+
+         call star_ptr(id, s, ierr)
+         if (ierr /= 0) then ! OOPS
+            return
+         end if
+
          w = 0
-         if (Rsurf > 2 * Rsun) w = 1.5e-9
+         if (Rsurf > s% x_ctrl(1) * Rsun) w = s% x_ctrl(2)
          ierr = 0
       end subroutine lecture1_other_wind
 

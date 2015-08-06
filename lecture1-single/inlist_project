@@ -38,6 +38,9 @@
   ! turn on mass loss when R > x_ctrl(1) * Rsun
     x_ctrl(1) = 2.0
 
+  ! use a mass loss rate (Msun/yr) of
+    x_ctrl(2) = 1.5e-9
+
   ! stop when the mass falls below 0.9 Msun
     star_mass_min_limit = 0.9
 
