@@ -41,8 +41,4 @@
   ! stop when the mass falls below 0.9 Msun
     star_mass_min_limit = 0.9
 
-  ! only allow small fractional changes in the mass in a timestep
-    delta_lg_star_mass_hard_limit = 4.34e-4
-
-
 / ! end of controls namelist
