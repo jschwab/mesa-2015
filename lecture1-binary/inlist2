@@ -1,0 +1,37 @@
+! MESA Summer School 2015: Lecture 1
+! Part 3: Evolving Binary Stars
+! Josiah Schwab & Emily Leiner
+
+! in the first task, star2 is a point mass, so this is ignored
+
+&star_job
+
+  ! display on-screen plots
+    pgstar_flag = .true.
+
+/ !end of star_job namelist
+
+
+&controls
+
+  ! reduce the spatial and temporal resolution of the models
+  ! faster runs let us cover more material in lecture
+    varcontrol_target = 1e-3
+    mesh_delta_coeff = 3.0
+
+  ! select where to output data about star2
+    log_directory = 'LOGS2'
+    photo_directory = 'photos2'
+
+  ! don't let the run go on too long
+    max_model_number = 250
+
+/ ! end of controls namelist
+
+
+&pgstar
+
+  read_extra_pgstar_inlist1 = .true.
+  extra_pgstar_inlist1_name = 'inlist_pgstar'
+
+/ ! end of pgstar namelist

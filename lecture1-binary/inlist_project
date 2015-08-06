@@ -1,0 +1,35 @@
+! MESA Summer School 2015: Lecture 1
+! Part 3: Evolving Binary Stars
+! Josiah Schwab & Emily Leiner
+
+&binary_job
+
+  ! each star has its own inlists
+    inlist_names(1) = 'inlist1'
+    inlist_names(2) = 'inlist2'
+
+  ! in this example, we will treat star 2 as a point mass
+    evolve_both_stars = .false.
+
+/ ! end of binary_job namelist
+
+&binary_controls
+
+  ! in inlist1, we will load a saved model for star1
+
+  ! since star2 is a point mass, we need to set its mass (in Msun)
+    m2 = 1.4
+
+  ! we need to set the initial orbital properties of the binary
+    initial_period_in_days = -1  ! -1 means ignore this
+
+  ! use implicit Roche lobe overflow
+    max_tries_to_achieve = 10
+
+  ! transfer efficiency controls
+    limit_retention_by_mdot_edd = .false.
+
+  ! turn off magnetic braking in this example
+    do_jdot_mb = .false.
+
+/ ! end of binary_controls namelist
