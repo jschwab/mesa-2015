@@ -22,6 +22,7 @@
 
   ! we need to set the initial orbital properties of the binary
     initial_period_in_days = -1  ! -1 means ignore this
+    initial_separation_in_Rsuns = 6.0
 
   ! use implicit Roche lobe overflow
     max_tries_to_achieve = 10
