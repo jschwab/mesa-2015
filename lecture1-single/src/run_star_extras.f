@@ -76,23 +76,16 @@
          integer, intent(in) :: id, id_extra
          integer :: ierr
          type (star_info), pointer :: s
-         real(dp) :: R, dR, delta
-         real(dp), parameter :: epsilon = 1d-6
          ierr = 0
          call star_ptr(id, s, ierr)
          if (ierr /= 0) return
          extras_check_model = keep_going
-
-         R = s% r(1)
-         dR = r - s% x_ctrl(1) * min_R
-         delta = dr / (s% x_ctrl(1) * min_R)
-
-         if ((delta > 0)) then
-            if (delta > epsilon) then
-               extras_check_model = redo
-               s% dt = 0.5d0 * s% dt
-            endif
-         endif
+         if (.false. .and. s% star_mass_h1 < 0.35d0) then
+            ! stop when star hydrogen mass drops to specified level
+            extras_check_model = terminate
+            write(*, *) 'have reached desired hydrogen mass'
+            return
+         end if
 
 
          ! if you want to check multiple conditions, it can be useful
