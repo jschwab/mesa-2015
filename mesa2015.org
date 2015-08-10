@@ -275,7 +275,7 @@ can set the elements in your inlists
     x_ctrl(1) = 3.14
     x_ctrl(2) = 2.78
     x_integer_ctrl(1) = 42
-    x_logical_ctrl(1) = true
+    x_logical_ctrl(1) = .true.
   / ! end of controls inlist
 #+END_SRC
  and access them later on as part of the star structure (i.e., ~s%
