@@ -311,10 +311,13 @@ value of the solar radius (in cm) is named ~Rsun~.
 #+BEGIN_SRC f90
   ! returns either keep_going or terminate.
   ! note: cannot request retry or backup; extras_check_model can do that.
-  integer function extras_finish_step(s, id, id_extra)
-     type (star_info), pointer :: s
+  integer function extras_finish_step(id, id_extra)
      integer, intent(in) :: id, id_extra
      integer :: ierr
+     type (star_info), pointer :: s
+     ierr = 0
+     call star_ptr(id, s, ierr)
+     if (ierr /= 0) return
      extras_finish_step = keep_going
      call store_extra_info(s)
 
@@ -330,7 +333,6 @@ value of the solar radius (in cm) is named ~Rsun~.
      ! by default, indicate where (in the code) MESA terminated
      if (extras_finish_step == terminate) s% termination_code = t_extras_finish_step
   end function extras_finish_step
-
 #+END_SRC
 
 Now, recompile your working directory

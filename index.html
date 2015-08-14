@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2015-08-10 Mon 07:47 -->
+<!-- 2015-08-14 Fri 13:56 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>MESA Summer School 2015: Lecture 1</title>
@@ -619,10 +619,13 @@ value of the solar radius (in cm) is named <code>Rsun</code>.
 
 <pre class="src src-f90"><span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">returns either keep_going or terminate.</span>
 <span style="color: #ff7f24;">! </span><span style="color: #ff7f24;">note: cannot request retry or backup; extras_check_model can do that.</span>
-<span style="color: #98fb98;">integer </span><span style="color: #00ffff;">function</span><span style="color: #eedd82;"> </span><span style="color: #87cefa;">extras_finish_step</span><span style="color: #FFFFFF; background-color: #000000;">(s, id, id_extra)</span>
-   <span style="color: #98fb98;">type (star_info)</span>, <span style="color: #00ffff;">pointer</span> :: <span style="color: #eedd82;">s</span>
+<span style="color: #98fb98;">integer </span><span style="color: #00ffff;">function</span><span style="color: #eedd82;"> </span><span style="color: #87cefa;">extras_finish_step</span><span style="color: #FFFFFF; background-color: #000000;">(id, id_extra)</span>
    <span style="color: #98fb98;">integer</span>, <span style="color: #00ffff;">intent</span>(in) ::<span style="color: #eedd82;"> id, id_extra</span>
    <span style="color: #98fb98;">integer</span> ::<span style="color: #eedd82;"> ierr</span>
+   <span style="color: #98fb98;">type (star_info)</span>, <span style="color: #00ffff;">pointer</span> :: <span style="color: #eedd82;">s</span>
+   ierr = 0
+   <span style="color: #00ffff;">call</span> <span style="color: #87cefa;">star_ptr</span>(id, s, ierr)
+   <span style="color: #00ffff;">if</span> (ierr /= 0) <span style="color: #00ffff;">return</span>
    extras_finish_step = keep_going
    <span style="color: #00ffff;">call</span> <span style="color: #87cefa;">store_extra_info</span>(s)
 
@@ -967,7 +970,7 @@ system with an initial orbital period of 16 hours.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Josiah Schwab and Emily Leiner</p>
-<p class="date">Created: 2015-08-10 Mon 07:47</p>
+<p class="date">Created: 2015-08-14 Fri 13:56</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
